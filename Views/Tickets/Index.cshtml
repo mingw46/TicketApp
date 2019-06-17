@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ticket.Models.Ticket>
+﻿@model IEnumerable<Ticket.Models.TicketModel>
 
 @{
     ViewBag.Title = "Index";
@@ -9,19 +9,31 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<div class="justify-content-end text-right">
+    <p class="text-primary text-sm-right">Choose showing system</p>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary" id="btnClassic">
+            <span class="fas fa-table"> Classic</span>
+            <input type="radio" name="options" autocomplete="off" checked />
+        </label>
+        <label class="btn btn-secondary" id="btnTable">
+            <span class="fas fa-table"> Table</span>
+            <input type="radio" name="options" autocomplete="off" />
+        </label>
+     </div>
+</div>
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Topic)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.TicketStatus)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedUserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AssigmentedUserID)
+            @Html.DisplayNameFor(model => model.EtaDate)
         </th>
         <th></th>
     </tr>
@@ -32,13 +44,10 @@
             @Html.DisplayFor(modelItem => item.Topic)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.TicketStatus)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedUserID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssigmentedUserID)
+            @Html.DisplayFor(modelItem => item.EtaDate)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TicketID }) |

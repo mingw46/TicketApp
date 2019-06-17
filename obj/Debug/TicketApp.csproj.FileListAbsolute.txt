@@ -109,4 +109,5 @@ C:\Users\pstrupiechowski\source\repos\Ticket\Ticket\bin\Microsoft.AspNet.Identit
 C:\Users\pstrupiechowski\source\repos\Ticket\Ticket\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\pstrupiechowski\source\repos\Ticket\Ticket\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\pstrupiechowski\source\repos\Ticket\Ticket\obj\Debug\TicketApp.csproj.CopyComplete
+C:\Users\pstrupiechowski\source\repos\Ticket\Ticket\bin\Newtonsoft.Json.pdb
 C:\Users\pstrupiechowski\source\repos\Ticket\Ticket\obj\Debug\TicketApp.csprojAssemblyReference.cache

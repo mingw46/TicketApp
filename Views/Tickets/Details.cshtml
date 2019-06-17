@@ -1,4 +1,4 @@
-﻿@model Ticket.Models.Ticket
+﻿@model Ticket.Models.TicketModel
 
 @{
     ViewBag.Title = "Details";
@@ -27,19 +27,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedUserID)
+            @Html.DisplayNameFor(model => model.TicketStatus)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatedUserID)
+            @Html.DisplayFor(model => model.TicketStatus)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AssigmentedUserID)
+            @Html.DisplayNameFor(model => model.EtaDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AssigmentedUserID)
+            @Html.DisplayFor(model => model.EtaDate)
         </dd>
 
     </dl>

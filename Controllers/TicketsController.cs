@@ -6,14 +6,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Ticket;
+using Ticket.Filters;
 using Ticket.Models;
 
 namespace Ticket.Controllers
 {
+
+    [Authorize]
     public class TicketsController : Controller
     {
-        private Model db = new Model();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tickets
         public ActionResult Index()
@@ -28,7 +30,7 @@ namespace Ticket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Ticket ticket = db.Tickets.Find(id);
+            Models.TicketModel ticket = db.Tickets.Find(id);
             if (ticket == null)
             {
                 return HttpNotFound();
@@ -47,7 +49,22 @@ namespace Ticket.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TicketID,Topic,Description,CreatedUserID,AssigmentedUserID")] Models.Ticket ticket)
+        public ActionResult Create([Bind(Include = "TicketID,Topic,Description,TicketStatus,EtaTime")] Models.TicketModel ticket)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Tickets.Add(ticket);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(ticket);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [HMACAuthentication]
+        public ActionResult Add([Bind(Include = "TicketID,Topic,Description,EmailFrom")] Models.TicketModel ticket)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +83,7 @@ namespace Ticket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Ticket ticket = db.Tickets.Find(id);
+            Models.TicketModel ticket = db.Tickets.Find(id);
             if (ticket == null)
             {
                 return HttpNotFound();
@@ -79,7 +96,7 @@ namespace Ticket.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TicketID,Topic,Description,CreatedUserID,AssigmentedUserID")] Models.Ticket ticket)
+        public ActionResult Edit([Bind(Include = "TicketID,Topic,Description,TicketStatus,EtaTime")] Models.TicketModel ticket)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +114,7 @@ namespace Ticket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Ticket ticket = db.Tickets.Find(id);
+            Models.TicketModel ticket = db.Tickets.Find(id);
             if (ticket == null)
             {
                 return HttpNotFound();
@@ -110,7 +127,7 @@ namespace Ticket.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Models.Ticket ticket = db.Tickets.Find(id);
+            Models.TicketModel ticket = db.Tickets.Find(id);
             db.Tickets.Remove(ticket);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -24,6 +24,8 @@ namespace Ticket.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        public DbSet<TicketModel> Tickets { get; set; }
+        public DbSet<EmailConfiguration> EmailConfigurations { get; set; }
 
         public static ApplicationDbContext Create()
         {
